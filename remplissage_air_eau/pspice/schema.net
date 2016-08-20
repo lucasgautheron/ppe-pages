@@ -1,0 +1,25 @@
+* Schematics Netlist *
+
+
+
+R_R2         ep s  470k  
+R_R1         ep mv  100  
+R_Rdiv1         s PIC_A3  1.8k  
+R_R4         0 mv  47k  
+R_R3         mv batt  47k  
+X_U5A         ep em batt 0 s LM324
+V_Vdeb         em $N_0001 DC 1 
++SIN 0 40m 82 0 0 0
+V_VdebP         $N_0001 $N_0002 DC 1 
++SIN 0 1m 4000 0 0 0
+V_VdebPP         mv $N_0002 DC 1 
++SIN 0 2m 8000 0 0 0
+R_Rdiv2         PIC_A3 0  1.8k  
+RT_Rangle         5v PIC_A0 {(10K*(1-0.5))+.001}
+RB_Rangle        PIC_A0 0 {(10K*0.5)+.001}
+V_V5         5v 0 DC 5V  
+V_V12         batt 0 DC 12  
+X_RAZ         $N_0003 5v Sw_tOpen PARAMS: tOpen=1 ttran=1u Rclosed=0.01
++  Ropen=1Meg
+R_Rraz         0 $N_0003  10k  
+R_R100         0 PIC_A0  1Meg  

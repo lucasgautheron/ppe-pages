@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PPE</title>
+		<link rel="stylesheet" type="text/css" href="media/style.css" />
+	</head>
+	<body>
+		<div id="global">
+			<div id="header">
+				<h1>PPE TS.SI</h1>
+                <h2>Base de lancement de fusée à eau</h2>
+                <h3>GAUTHERON - LACROIX - LEGENDRE - MARIE</h3>
+			</div>
+			<div id="center">
+            <div id="main">
+                <div id="sidebar">
+                
+					<h3>Navigation</h3>
+                    <h4><a href="index.html">I. Introduction</a></h4>
+                    <h4>II.&nbsp; Présentation</h4>
+                    <ol class="menu">
+                        <li><a href="problematique.html">Problématique</a></li>
+                        <li><a href="produit.html">Le produit</a></li>
+                    </ol>
+                    
+                    <h4>III. Solutions techniques</h4>
+                    
+                    <b>1. Inclinaison support</b>
+                    
+                    <ol class="menu">
+                        <li><a href="moteur.html">Moteur</a></li>
+                        <li><a href="capteurs_position.html">Capteurs de position</a></li>
+                    </ol>
+                    
+                    <b>2. Remplissage air / eau</b>
+                    
+                    <ol class="menu">
+                        <li><a href="remplissage_air_eau.html">Remplissage</a></li>
+                        <li><a href="debitmetre.html">Débitmètre</a></li>
+                    </ol>
+                    
+                    <b>3. Compression</b>
+                    <ol class="menu">
+                        <li><a href="compression.html">Système de compression</a></li>
+                    </ol>
+                    
+                    <h4>IV. Le microcontrôleur</h4>
+                    <ol class="menu">
+                        <li><a href="programme.html">Le programme</a></li>
+                        <li><a href="ports.html">Les ports</a></li>
+                    </ol>
+                    
+                    <h4>V. La maquette</h4>
+                    <ol class="menu">
+                        <li><a href="solidworks.html">Solidworks</a></li>
+                        <li><a href="production.html">Production</a></li>
+                        <li><a href="tirs.html">Tirs</a></li>
+                    </ol>
+					
+					<h4><a href="conclusion.html">VI. Conclusion</a></h4>
+				</div>        
+                
+				<div id="content">
+					<h2>Ports</h2>
+					<p>Le choix des ports est imposé par l'usage d'entrées analogiques et par le nombre de bits disponibles sur chaque port.</p>
+					
+					<table class="medium">
+					<tr class="head">
+						<td>Port</td>
+						<td>Bits</td>
+						<td>Entrées/Sorties</td>
+					</tr>
+					<tr>
+						<td>Port A</td>
+						<td>6 bits</td>
+						<td>
+						<ol start="0">
+							<li>Potentiomètre (analog)</li>
+							<li>Capteur pression (analog)</li>
+							<li>RAZ position plan</li>
+							<li>Débitmètre</li>
+						</ol></td>
+					</tr>
+					
+					<tr>
+						<td>Port B</td>
+						<td>8 bits</td>
+						<td>
+						LCD</td>
+					</tr>
+
+					<tr>
+						<td>Port C</td>
+						<td>7 bits</td>
+						<td>
+						<b>Carte relais hydropneumatique</b><br />
+						<ol start="0">
+							<li>Compression</li>
+							<li>Eau</li>
+							<li>Air</li>
+						</ol></td>
+					</tr>
+
+				<tr>
+						<td>Port D</td>
+						<td>8 bits</td>
+						<td>
+						Keypad</td>
+					</tr>
+
+				<tr>
+						<td>Port E</td>
+						<td>4 bits</td>
+						<td>
+						<b>Carte relais moteur</b><br />
+						<ol start="0">
+							<li>m/a moteur</li>
+							<li>sens moteur</li>
+							<li>sens moteur</li>
+						</ol></td>
+					</tr>
+					</table>
+                    
+                    <p>Des informations complémentaires sur les liaisons avec le PIC sont accessibles ici : <a href="documentation/ports.doc">documentation/ports.doc</a></p>
+				</div>
+                
+				
+			</div>
+            </div>
+			<div id="footer">
+				<b>PPE 2011-2012</b>, AUTOMATISATION BASE DE LANCEMENT DE FUSÉES À EAU.<br />
+                Lycée Louis Lachenal
+			</div>
+
+		</div>
+	</body>
+</html>

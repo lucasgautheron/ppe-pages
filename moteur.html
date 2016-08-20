@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PPE</title>
+		<link rel="stylesheet" type="text/css" href="media/style.css" />
+	</head>
+	<body>
+		<div id="global">
+			<div id="header">
+				<h1>PPE TS.SI</h1>
+                <h2>Base de lancement de fusée à eau</h2>
+                <h3>GAUTHERON - LACROIX - LEGENDRE - MARIE</h3>
+			</div>
+			<div id="center">
+            <div id="main">
+                 <div id="sidebar">
+                
+					<h3>Navigation</h3>
+                    <h4><a href="index.html">I. Introduction</a></h4>
+                    <h4>II.&nbsp; Présentation</h4>
+                    <ol class="menu">
+                        <li><a href="problematique.html">Problématique</a></li>
+                        <li><a href="produit.html">Le produit</a></li>
+                    </ol>
+                    
+                    <h4>III. Solutions techniques</h4>
+                    
+                    <b>1. Inclinaison support</b>
+                    
+                    <ol class="menu">
+                        <li><a href="moteur.html">Moteur</a></li>
+                        <li><a href="capteurs_position.html">Capteurs de position</a></li>
+                    </ol>
+                    
+                    <b>2. Remplissage air / eau</b>
+                    
+                    <ol class="menu">
+                        <li><a href="remplissage_air_eau.html">Remplissage</a></li>
+                        <li><a href="debitmetre.html">Débitmètre</a></li>
+                    </ol>
+                    
+                    <b>3. Compression</b>
+                    <ol class="menu">
+                        <li><a href="compression.html">Système de compression</a></li>
+                    </ol>
+                    
+                    <h4>IV. Le microcontrôleur</h4>
+                    <ol class="menu">
+                        <li><a href="programme.html">Le programme</a></li>
+                        <li><a href="ports.html">Les ports</a></li>
+                    </ol>
+                    
+                    <h4>V. La maquette</h4>
+                    <ol class="menu">
+                        <li><a href="solidworks.html">Solidworks</a></li>
+                        <li><a href="production.html">Production</a></li>
+                        <li><a href="tirs.html">Tirs</a></li>
+                    </ol>
+					
+					<h4><a href="conclusion.html">VI. Conclusion</a></h4>
+				</div>        
+                
+				<div id="content">
+					<h2>Moteur</h2>
+
+                <h3>Fonction</h3>
+
+<p>Le moteur a pour but de soulever la rampe de lancement de la fusée, il doit pouvoir tourner dans les 2 sens et avoir un couple suffisant. De plus sa vitesse de rotation ne doit pas être trop élevée pour permettre au PIC de le commander avec une bonne précision (valeur de l’angle). Nous voulions partir au début sur un moteur pas à pas mais nous avons ensuite abandonné car ce moteur délivre peu de couple et n’est pas facilement contrôlable par le microcontrôleur. Nous avons donc finalement choisi un motoréducteur 12V continu.</p>
+
+<h3>Solution</h3>
+<p><a href="moteur/images/chaine_energie.jpg" target="_blank"><img width="680" height="476" src="moteur/images/chaine_energie.jpg" class="border" /></a></p>
+
+<h3>Caractéristiques du moteur</h3>
+
+<table class="medium">
+<tr>
+    <td>Tension nominale</td>
+    <td>12 V</td>
+</tr>
+
+<tr>
+    <td>Vitesse de rotation (avant réduction)</td>
+    <td>6200 tours/min</td>
+</tr>
+
+<tr>
+    <td>Vitesse de rotation (après réduction)</td>
+    <td>122 tours/min (12.8 rad/s)</td>
+</tr>
+
+<tr>
+    <td>Rapport de réduction</td>
+    <td>1/50</td>
+</tr>
+</table>
+
+<h3>Intégration du moteur</h3>
+<h4>Schéma cinématique</h4>
+<p><a href="moteur/images/schema_cinematique.jpg" target="_blank"><img width="600" height="440" src="moteur/images/schema_cinematique.jpg" class="border" /></a></p>
+<p>Vue plan</p>
+<p><a href="moteur/images/mise_en_plan.jpg" target="_blank"><img width="600" height="395" src="moteur/images/mise_en_plan.jpg" class="border" /></a></p>
+<p>(Nomenclature : <a href="moteur/nomenclature.xls" target="_blank">tableur excel</a> / <a href="moteur/images/nomenclature.jpg" target="_blank">image</a>)</p>
+
+<p>Nous avons choisi comme entrainement et comme système de réduction entre la tige filetée et l’axe du moteur un système de poulie-courroie pour plusieurs raisons. L’entrainement par pignon-roue n’était pas possible à cause du manque de place et de l’incompatibilité des différents pignons et roues. Le choix de la poulie et de la courroie était imposé par la distance séparant nos 2 axes (seules ces poulies convenaient avec notre courroie).</p>
+
+<table class="medium">
+<tr>
+    <td>Poulie entrainante</td>
+    <td>10 dents</td>
+</tr>
+
+<tr>
+    <td>Poulie entrainée</td>
+    <td>20 dents</td>
+</tr>
+
+<tr>
+    <td>Courroie</td>
+    <td>40 dents (203 mm)</td>
+</tr>
+
+<tr>
+    <td>Réduction</td>
+    <td>1/2</td>
+</tr>
+
+<tr>
+    <td>Vitesse de rotation de sortie</td>
+    <td>61 tours/min soit 6.4 rad/s (1 tour / s)</td>
+</tr>
+</table>
+
+<h3>Simulation et système en fonctionnement</h3>
+
+<p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="700" height="376">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../moteur/videos/systeme_entrainement.flv&amp;width=700&amp;height=376" />
+</object></p>
+<p>(Si la vidéo ne fonctionne pas, vous pouvez la lire sur ce lien : <a href="moteur/videos/systeme_entrainement.wmv" target="_blank">moteur/videos/systeme_entrainement.wmv</a>)</p>
+
+<h3>Câblage du moteur</h3>
+<h4>Fonctionnement automatisé</h4>
+<p>Le moteur doit pouvoir fonctionner dans les sens (montée et descente du plan incliné). Pour pouvoir inverser son sens de rotation, nous avons monté le moteur sur un "pont en H".</p>
+<p><a href="moteur/images/schema_pont_h.png" target="_blank"><img width="570" height="227" src="moteur/images/schema_pont_h.png" class="border" /></a></p>
+<p>Les contacteurs nommés KM1, KM2 et KM3 sur le schéma sont commandés par le PIC via une carte relais de ce type :</p>
+<p><a href="moteur/images/carte_relais.jpg" target="_blank"><img width="500" height="140" src="moteur/images/carte_relais.jpg" class="border" /></a></p>
+
+<h4>Fonctionnement manuel</h4>
+<p>Nous avons également mis en place une commande manuelle du moteur à l'aide d'interrupteurs.</p>
+<p><a href="moteur/images/schema_manuel.png" target="_blank"><img width="499" height="246" src="moteur/images/schema_manuel.png" class="border" /></a></p>
+				</div>
+				
+			</div>
+            </div>
+			<div id="footer">
+				<b>PPE 2011-2012</b>, AUTOMATISATION BASE DE LANCEMENT DE FUSÉES À EAU.<br />
+                Lycée Louis Lachenal
+			</div>
+
+		</div>
+	</body>
+</html>

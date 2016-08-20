@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PPE</title>
+		<link rel="stylesheet" type="text/css" href="media/style.css" />
+	</head>
+	<body>
+		<div id="global">
+			<div id="header">
+				<h1>PPE TS.SI</h1>
+                <h2>Base de lancement de fusée à eau</h2>
+                <h3>GAUTHERON - LACROIX - LEGENDRE - MARIE</h3>
+			</div>
+			<div id="center">
+            <div id="main">
+                <div id="sidebar">
+                
+					<h3>Navigation</h3>
+                    <h4><a href="index.html">I. Introduction</a></h4>
+                    <h4>II.&nbsp; Présentation</h4>
+                    <ol class="menu">
+                        <li><a href="problematique.html">Problématique</a></li>
+                        <li><a href="produit.html">Le produit</a></li>
+                    </ol>
+                    
+                    <h4>III. Solutions techniques</h4>
+                    
+                    <b>1. Inclinaison support</b>
+                    
+                    <ol class="menu">
+                        <li><a href="moteur.html">Moteur</a></li>
+                        <li><a href="capteurs_position.html">Capteurs de position</a></li>
+                    </ol>
+                    
+                    <b>2. Remplissage air / eau</b>
+                    
+                    <ol class="menu">
+                        <li><a href="remplissage_air_eau.html">Remplissage</a></li>
+                        <li><a href="debitmetre.html">Débitmètre</a></li>
+                    </ol>
+                    
+                    <b>3. Compression</b>
+                    <ol class="menu">
+                        <li><a href="compression.html">Système de compression</a></li>
+                    </ol>
+                    
+                    <h4>IV. Le microcontrôleur</h4>
+                    <ol class="menu">
+                        <li><a href="programme.html">Le programme</a></li>
+                        <li><a href="ports.html">Les ports</a></li>
+                    </ol>
+                    
+                    <h4>V. La maquette</h4>
+                    <ol class="menu">
+                        <li><a href="solidworks.html">Solidworks</a></li>
+                        <li><a href="production.html">Production</a></li>
+                        <li><a href="tirs.html">Tirs</a></li>
+                    </ol>
+					
+					<h4><a href="conclusion.html">VI. Conclusion</a></h4>
+				</div>        
+				<div id="content">
+					<h2>Programme du microcontrôleur</h2>
+                    <p>Nous avons réalisé le programme complet associé au système sur flowcode (qui comprend renseignement des différents paramètres par l'utilisateur via le keypad, l'affichage avec l'écran LCD, mais aussi la procédure de mise en position et de lancement de la fusée.)</p>
+                    
+                    <p><b>(Le fichier flowcode est accessible à l'adresse : pic/flowcode/ppe.fcf)</b></p>
+                    
+                    <h3>Liste des macros</h3>
+                    <p>Le programme étant assez long, nous l'avons "factorisé" en plusieurs macros.</p>
+                    
+                    <div>
+                    <table class="medium">
+                    <tr class="head">
+                        <td>Macro</td>
+                        <td>Rôle</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Principal</td>
+                        <td>Gérer l'appel des macros depuis la boucle principale selon la tâche à effectuer.</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Init</td>
+                        <td>Initialisation des différentes variables utilisées par le programme.</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Entrees_reinitialisation</td>
+                        <td>Lecture des entrées permettant l'interface avec l'utilisateur</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Affichage_LCD</td>
+                        <td>Gestion de l'afficheur LCD</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Menu_principal</td>
+                        <td>Menu principal (choix entre "paramètres persos" ou "prédéfinis")</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>ParamMenu</td>
+                        <td>Choix des différentes paramètres (angle, volume, pression) en mode "personnalisé"</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>OptMenu</td>
+                        <td>Choix entre un tir "haut" et "long" (en paramètres prédéfinis)</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>choix_param</td>
+                        <td>Validation du paramètre courant</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>volume_bouteille</td>
+                        <td>Spécification du volume de la bouteille (en mode "prédéfini")</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>ConfirmationRetour</td>
+                        <td>Confirmation des paramètres</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>MiseEnPosition</td>
+                        <td>Gestion des différentes étapes de mise en position de la fusée avant lancement.</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Moteur</td>
+                        <td>Inclinaison de la plaque-support (commandes pont en H, calcul de l'angle d'inclinaison...)</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Eau</td>
+                        <td>Remplissage en eau de la fusée (commande électrovanne eau, comptage des impulsions du débitmètre)</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>pression</td>
+                        <td>Insertion de l'air (jusqu'à ce que la pression requise soit atteinte)</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>lancement</td>
+                        <td>Relâchement du vérin de compression.</td>
+                    </tr>
+                    
+                    
+                    </table>
+                    </div>
+					
+					<h3>Modes de fonctionnement</h3>
+					<p>Nous avons mis en place trois types de fonctionnement différents :</p>
+					<ul>
+						<li>Un mode laissant à l'utilisateur le choix de tous les paramètres (angle d'inclinaison, volume d'eau à insérer et pression)</li>
+						<li>Un mode aux paramètres prédéfinis optimisant un tir en hauteur (angle de 90°, pression max 8 bar, volume d'eau d'1/3 du volume total de la bouteille)</li>
+						<li>Un mode aux paramètres prédéfinis optimisant un tir en longueur (angle de 45°, pression max 8 bar, volume d'eau d'1/3 du volume total de la bouteille)</li>
+					</ul>
+                    
+                    <h3>Simulation sur flowcode</h3>
+                    <p>Nous avons simulé l'exécution du programme sur flowcode.</p>
+					<h4>Paramètres personnalisés</h4>
+                    
+                    <p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="720" height="460">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../pic/videos/simulation.flv&amp;width=720&amp;height=460" />
+</object></p>
+<p>(Si la vidéo ne fonctionne pas, où si vous souhaitez l'obtenir en plus grand format, vous pouvez la lire sur ce lien : <a href="pic/videos/simulation.wmv" target="_blank">pic/videos/simulation.wmv</a>)</p>
+                    <h4>Paramètres prédéfinis</h4>
+					<p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="720" height="460">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../pic/videos/simulation2.flv&amp;width=720&amp;height=460" />
+</object></p>
+<p>(Si la vidéo ne fonctionne pas, où si vous souhaitez l'obtenir en plus grand format, vous pouvez la lire sur ce lien : <a href="pic/videos/simulation2.wmv" target="_blank">pic/videos/simulation2.wmv</a>)</p>
+				</div>
+				
+			</div>
+            </div>
+			<div id="footer">
+				<b>PPE 2011-2012</b>, AUTOMATISATION BASE DE LANCEMENT DE FUSÉES À EAU.<br />
+                Lycée Louis Lachenal
+			</div>
+
+		</div>
+	</body>
+</html>

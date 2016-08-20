@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PPE</title>
+		<link rel="stylesheet" type="text/css" href="media/style.css" />
+	</head>
+	<body>
+		<div id="global">
+			<div id="header">
+				<h1>PPE TS.SI</h1>
+                <h2>Base de lancement de fusée à eau</h2>
+                <h3>GAUTHERON - LACROIX - LEGENDRE - MARIE</h3>
+			</div>
+			<div id="center">
+            <div id="main"> 
+                 <div id="sidebar">
+                
+					<h3>Navigation</h3>
+                    <h4><a href="index.html">I. Introduction</a></h4>
+                    <h4>II.&nbsp; Présentation</h4>
+                    <ol class="menu">
+                        <li><a href="problematique.html">Problématique</a></li>
+                        <li><a href="produit.html">Le produit</a></li>
+                    </ol>
+                    
+                    <h4>III. Solutions techniques</h4>
+                    
+                    <b>1. Inclinaison support</b>
+                    
+                    <ol class="menu">
+                        <li><a href="moteur.html">Moteur</a></li>
+                        <li><a href="capteurs_position.html">Capteurs de position</a></li>
+                    </ol>
+                    
+                    <b>2. Remplissage air / eau</b>
+                    
+                    <ol class="menu">
+                        <li><a href="remplissage_air_eau.html">Remplissage</a></li>
+                        <li><a href="debitmetre.html">Débitmètre</a></li>
+                    </ol>
+                    
+                    <b>3. Compression</b>
+                    <ol class="menu">
+                        <li><a href="compression.html">Système de compression</a></li>
+                    </ol>
+                    
+                    <h4>IV. Le microcontrôleur</h4>
+                    <ol class="menu">
+                        <li><a href="programme.html">Le programme</a></li>
+                        <li><a href="ports.html">Les ports</a></li>
+                    </ol>
+                    
+                    <h4>V. La maquette</h4>
+                    <ol class="menu">
+                        <li><a href="solidworks.html">Solidworks</a></li>
+                        <li><a href="production.html">Production</a></li>
+                        <li><a href="tirs.html">Tirs</a></li>
+                    </ol>
+					
+					<h4><a href="conclusion.html">VI. Conclusion</a></h4>
+				</div>        
+                
+				<div id="content">
+					<h2>Remplissage air/eau</h2>
+                    <p>Pour permettre le décollage de la fusée, il est nécessaire d’insérer dans celle-ci un mélange air / eau. Par ailleurs, lors du remplissage, il faut maintenir la fusée en place et assurer l’étanchéité.
+Ces différentes fonctions peuvent être réalisées manuellement ou automatiquement par le biais du microcontrôleur.</p>
+
+<h3>Solution</h3>
+<p>Pour réaliser ces taches, nous avons choisis d’utiliser des distributeurs ainsi que des électrovannes qui permettent l’entrée ou non des fluides en direction de la fusée et du vérin (permettant le maintien). </p>
+    <p style="margin: 10px auto; width: 550px; border: 2px solid gray; text-align: center;"><a href="remplissage_air_eau/images/chaine_energie_eau.jpg" target="_blank"><img width="508" height="350" src="remplissage_air_eau/images/chaine_energie_eau.jpg" border="0" /></a></p>
+    <p style="margin: 10px auto; width: 550px; border: 2px solid gray; text-align: center;"><a href="remplissage_air_eau/images/chaine_energie_air.jpg" target="_blank"><img width="462" height="350" src="remplissage_air_eau/images/chaine_energie_air.jpg" border="0" /></a></p>
+
+<table>
+    <tr>
+        <td><b>Câblage pneumatique réalisé sur la maquette</b></td>
+        <td><b>Câblage pneumatique théorique</b></td>
+    </tr>
+    
+    <tr>
+        <td><a href="remplissage_air_eau/images/schema_pneumatique_reel.jpg" target="_blank"><img width="350" height="248" src="remplissage_air_eau/images/schema_pneumatique_reel.jpg" class="border" /></a></td>
+        <td><a href="remplissage_air_eau/images/schema_pneumatique_ideal.jpg" target="_blank"><img width="350" height="248" src="remplissage_air_eau/images/schema_pneumatique_ideal.jpg" class="border" /></a></td>
+    </tr>
+</table>
+ 	 
+<p>
+Pour la réalisation de la maquette, nous avons simplifié le câblage. Celui-ci permet uniquement de remplir la fusée d’eau (électrovanne bleue), de comprimé l’air présent dans celle-ci (électrovanne orange) et de la maintenir tout en réalisant l’étanchéité (distributeur vert).
+En théorie, système de sécurité est nécessaire, c’est ce que nous avons ajouté sur le second câblage (distributeurs rouges). Ces distributeurs permettent en cas de coupure de courant, volontaire ou non, de décompresser la fusée (distributeur de droite) puis de relâcher le système de maintien lorsque la fusée n’est plus sous pression (distributeur de gauche). Les risques sont ainsi limités en cas de problème.</p>
+<p>De plus, nous avons inséré dans le câblage un manomètre permettant de connaitre la pression présente dans la fusée et un débitmètre qui nous indique le volume d’eau inséré.
+L’ensemble du système nécessite pour son fonctionnement une alimentation 24V pouvant être réalisée à l’aide de deux batteries 12V en séries, un compresseur qui peut être alimenté par ces mêmes batteries et une réserve d’eau permettant la réalisation de plusieurs tirs de fusées consécutifs. </p>
+
+<h3>Câblage électrique</h3>
+<p>Les électrovannes sont reliées au PIC par l'intermédiaire d'une carte relais en mode automatique (<a href="moteur/images/carte_relais.jpg" target="_blank">voir image</a>).<br />En mode manuel, elles sont commandées par les interrupteurs présents sur le boitier de commande.</p>
+
+
+				</div>
+				
+			</div>
+            </div>
+			<div id="footer">
+				<b>PPE 2011-2012</b>, AUTOMATISATION BASE DE LANCEMENT DE FUSÉES À EAU.<br />
+                Lycée Louis Lachenal
+			</div>
+
+		</div>
+	</body>
+</html>

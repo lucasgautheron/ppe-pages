@@ -1,0 +1,31 @@
+* Schematics Aliases *
+
+.ALIASES
+R_R2            R2(1=ep 2=s )
+R_R1            R1(1=ep 2=mv )
+R_Rdiv1          Rdiv1(1=s 2=PIC_A3 )
+R_R4            R4(1=0 2=mv )
+R_R3            R3(1=mv 2=batt )
+X_U5A           U5A(+=ep -=em V+=batt V-=0 OUT=s )
+V_Vdeb          Vdeb(+=em -=$N_0001 )
+V_VdebP          VdebP(+=$N_0001 -=$N_0002 )
+V_VdebPP          VdebPP(+=mv -=$N_0002 )
+R_Rdiv2          Rdiv2(1=PIC_A3 2=0 )
+RT_Rangle          Rangle(1=5v t=PIC_A0 )
+RB_Rangle         Rangle(t=PIC_A0 2=0 )
+V_V5            V5(+=5v -=0 )
+V_V12           V12(+=batt -=0 )
+X_RAZ           RAZ(1=$N_0003 2=5v )
+R_Rraz          Rraz(1=0 2=$N_0003 )
+R_R100          R100(1=0 2=PIC_A0 )
+_    _(s=s)
+_    _(ep=ep)
+_    _(mv=mv)
+_    _(PIC_A3=PIC_A3)
+_    _(batt=batt)
+_    _(em=em)
+_    _(PIC_A2=0)
+_    _(5v=5v)
+_    _(PIC_A0=PIC_A0)
+.ENDALIASES
+

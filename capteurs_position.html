@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PPE</title>
+		<link rel="stylesheet" type="text/css" href="media/style.css" />
+	</head>
+	<body>
+		<div id="global">
+			<div id="header">
+				<h1>PPE TS.SI</h1>
+                <h2>Base de lancement de fusée à eau</h2>
+                <h3>GAUTHERON - LACROIX - LEGENDRE - MARIE</h3>
+			</div>
+			<div id="center">
+            <div id="main">
+                 <div id="sidebar">
+                
+					<h3>Navigation</h3>
+                    <h4><a href="index.html">I. Introduction</a></h4>
+                    <h4>II.&nbsp; Présentation</h4>
+                    <ol class="menu">
+                        <li><a href="problematique.html">Problématique</a></li>
+                        <li><a href="produit.html">Le produit</a></li>
+                    </ol>
+                    
+                    <h4>III. Solutions techniques</h4>
+                    
+                    <b>1. Inclinaison support</b>
+                    
+                    <ol class="menu">
+                        <li><a href="moteur.html">Moteur</a></li>
+                        <li><a href="capteurs_position.html">Capteurs de position</a></li>
+                    </ol>
+                    
+                    <b>2. Remplissage air / eau</b>
+                    
+                    <ol class="menu">
+                        <li><a href="remplissage_air_eau.html">Remplissage</a></li>
+                        <li><a href="debitmetre.html">Débitmètre</a></li>
+                    </ol>
+                    
+                    <b>3. Compression</b>
+                    <ol class="menu">
+                        <li><a href="compression.html">Système de compression</a></li>
+                    </ol>
+                    
+                    <h4>IV. Le microcontrôleur</h4>
+                    <ol class="menu">
+                        <li><a href="programme.html">Le programme</a></li>
+                        <li><a href="ports.html">Les ports</a></li>
+                    </ol>
+                    
+                    <h4>V. La maquette</h4>
+                    <ol class="menu">
+                        <li><a href="solidworks.html">Solidworks</a></li>
+                        <li><a href="production.html">Production</a></li>
+                        <li><a href="tirs.html">Tirs</a></li>
+                    </ol>
+					
+					<h4><a href="conclusion.html">VI. Conclusion</a></h4>
+				</div>        
+                
+				<div id="content">
+					<h2>Capteurs de position</h2>
+                    <p>Pour pouvoir contrôler le moteur via le pont en H afin d'incliner le support de la fusée comme spécifié par l'utilisateur, le microcontrôleur doit connaitre à chaque instant la position de la plaque pour la comparer avec la valeur désirée.</p>
+                    
+                    <h3>Capteurs</h3>
+                    <table class="medium">
+                    <tr class="head">
+                        <td>Capteur</td>
+                        <td>Caractéristiques</td>
+                        <td>Rôle</td>
+                        <td>Connexion</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Potentiomètre</td>
+                        <td>0 -> 8.5 kΩ</td>
+                        <td>Fournir une grandeur analogique variant avec l'angle</td>
+                        <td>Entrée AN0 (A0) du PIC</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Bouton RAZ</td>
+                        <td>NO, enfoncé par la plaque en position horizontale</td>
+                        <td>Indiquer au PIC que le position critique est atteinte, et réglage de la valeur de référence du potentiomètre</td>
+                        <td>Entrée A2 du PIC</td>
+                    </tr>
+                    </table>
+                    
+                    <h3>Câblage</h3>
+                    
+                    <p><a href="capteurs_position/images/schema.jpg" target="_blank"><img width="464" height="413" src="capteurs_position/images/schema.jpg" class="border" /></a></p>
+                    
+                    <h3>Programmation / PIC</h3>
+                    
+                    <p>Le curseur du potentiomètre est relié au PIC sur l'entrée AN0 qui dispose d'un <acronym title="Convertisseur Analogique Numérique">CAN</acronym> (ou "<acronym title="Analog Digital Converter">ADC</acronym>") à 10 bits. Sachant que l'angle de rotation du potentiomètre est θmax = 300°, la résolution du convertisseur est <img src="capteurs_position/images/resolution.gif" class="latex" /> (ce qui est largement suffisant dans notre cas).</p>
+                    <p>Lorsque le bouton RAZ est enclenché (c'est à dire lorsque la plaque est en position horizontale), le microcontrôleur "fait le tarage" en calculant la valeur de référence du potentiomètre n<sub>0</sub> (entier codé sur 10 bits) correspondant à l'angle θ<sub>0</sub> = r.n<sub>0</sub>. Dès lors, à chaque instant, l'angle tourné θ est :<br />
+                    <img src="capteurs_position/images/theta.gif" class="latex" /> (les calculs se faisant avec des entiers, et n<sub>0</sub> <= n < 1024)
+                    <br />Cette valeur de θ peut être comparée à celle renseignée par l'utilisateur via le keypad. Lorsque l'écart entre θ et cette valeur est suffisamment faible, le moteur est arrêté.</p>
+                    
+                    <h3>Capteurs en fonctionnement</h3>
+                    <p>Sur les deux vidéos suivantes, des ohmètres ont été branchés aux bornes du bouton RAZ (multimètre bleu, à gauche) et aux bornes du potentiomètre (multimètre jaune, à droite). Lorsque la plaque est horizontale, la résistance aux bornes du bouton RAZ est nulle, puis devient infinie lorsque la plaque remonte. On peut voir la résistance du potentiomètre au niveau du curseur varier au cours de la montée ou de la descente de la plaque. (Sur ces vidéos, le moteur est commandé semi-manuellement grâce au PIC).</p>
+                    <p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="700" height="526">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../moteur/videos/capteurs_inclinaison_montee.flv&amp;width=700&amp;height=526" />
+</object></p>
+<p>(Si la vidéo ne fonctionne pas, vous pouvez la lire sur ce lien : <a href="moteur/videos/capteurs_inclinaison_montee.wmv" target="_blank">moteur/videos/capteurs_inclinaison_montee.wmv</a>)</p>
+
+<p>Descente de la plaque :</p>
+
+<p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="700" height="526">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../moteur/videos/capteurs_inclinaison_descente.flv&amp;width=700&amp;height=526" />
+</object></p>
+<p>(Si la vidéo ne fonctionne pas, vous pouvez la lire sur ce lien : <a href="moteur/videos/capteurs_inclinaison_descente.wmv" target="_blank">moteur/videos/capteurs_inclinaison_descente.wmv</a>)</p>
+
+<h3>Réglage automatique de l'inclinaison</h3>
+
+<p>Sur la vidéo suivante, nous avons programmé le microcontrôleur pour remettre la plaque en position horizontale puis l'incliner de 30° (de façon tout à fait automatique). L'essai est très concluant ! (Le papier bleu en arrière plan indique l'angle de 30°).
+<br /><b>NB : </b>Les leds indiquent la valeur numérique après conversion donnée par le potentiomètre, sur 8 bits.</p>
+
+<p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="700" height="395">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../moteur/videos/inclinaison_automatique.flv&amp;width=700&amp;height=395" />
+</object></p>
+<p>(Si la vidéo ne fonctionne pas, vous pouvez la lire sur ce lien : <a href="moteur/videos/inclinaison_automatique.wmv" target="_blank">moteur/videos/inclinaison_automatique.wmv</a>)</p>
+
+<h3>Réglage automatique et arrêt d'urgence</h3>
+<p>Nous avons lancé la même procédure que sur la vidéo précédente (descente + remontée à 30°). Nous l'avons interrompue en actionnant le bouton d'arrêt d'urgence.</p>
+<p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="700" height="395">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../moteur/videos/arret_urgence.flv&amp;width=700&amp;height=395" />
+</object></p>
+<p>(Si la vidéo ne fonctionne pas, vous pouvez la lire sur ce lien : <a href="moteur/videos/arret_urgence.wmv" target="_blank">moteur/videos/arret_urgence.wmv</a>)</p>
+
+<!--<p><object type="application/x-shockwave-flash" data="media/player_flv.swf" width="700" height="376">
+    <param name="movie" value="media/player_flv.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=../videos/procedure_complete_hd.flv&amp;width=700&amp;height=376" />
+</object></p>-->
+				</div>
+				
+			</div>
+            </div>
+			<div id="footer">
+				<b>PPE 2011-2012</b>, AUTOMATISATION BASE DE LANCEMENT DE FUSÉES À EAU.<br />
+                Lycée Louis Lachenal
+			</div>
+
+		</div>
+	</body>
+</html>

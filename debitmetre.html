@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>PPE</title>
+		<link rel="stylesheet" type="text/css" href="media/style.css" />
+	</head>
+	<body>
+		<div id="global">
+			<div id="header">
+				<h1>PPE TS.SI</h1>
+                <h2>Base de lancement de fusée à eau</h2>
+                <h3>GAUTHERON - LACROIX - LEGENDRE - MARIE</h3>
+			</div>
+			<div id="center">
+            <div id="main">
+                 <div id="sidebar">
+                
+					<h3>Navigation</h3>
+                    <h4><a href="index.html">I. Introduction</a></h4>
+                    <h4>II.&nbsp; Présentation</h4>
+                    <ol class="menu">
+                        <li><a href="problematique.html">Problématique</a></li>
+                        <li><a href="produit.html">Le produit</a></li>
+                    </ol>
+                    
+                    <h4>III. Solutions techniques</h4>
+                    
+                    <b>1. Inclinaison support</b>
+                    
+                    <ol class="menu">
+                        <li><a href="moteur.html">Moteur</a></li>
+                        <li><a href="capteurs_position.html">Capteurs de position</a></li>
+                    </ol>
+                    
+                    <b>2. Remplissage air / eau</b>
+                    
+                    <ol class="menu">
+                        <li><a href="remplissage_air_eau.html">Remplissage</a></li>
+                        <li><a href="debitmetre.html">Débitmètre</a></li>
+                    </ol>
+                    
+                    <b>3. Compression</b>
+                    <ol class="menu">
+                        <li><a href="compression.html">Système de compression</a></li>
+                    </ol>
+                    
+                    <h4>IV. Le microcontrôleur</h4>
+                    <ol class="menu">
+                        <li><a href="programme.html">Le programme</a></li>
+                        <li><a href="ports.html">Les ports</a></li>
+                    </ol>
+                    
+                    <h4>V. La maquette</h4>
+                    <ol class="menu">
+                        <li><a href="solidworks.html">Solidworks</a></li>
+                        <li><a href="production.html">Production</a></li>
+                        <li><a href="tirs.html">Tirs</a></li>
+                    </ol>
+					
+					<h4><a href="conclusion.html">VI. Conclusion</a></h4>
+				</div>        
+                
+				<div id="content">
+					<h2>Débitmètre</h2>
+            <h3>Problématiques et étude du capteur</h3>
+            <p>Une étape de la préparation du lancement de la fusée consiste à automatiser le remplissage de la bouteille en eau. Le volume d’eau à insérer peut-être :
+            <ul>
+	<li>Un choix prédéfini du programme du PIC</li>
+	<li>Renseigné arbitrairement par l’utilisateur via le « keypad » au microcontrôleur </li>
+        </ul>
+    </p>
+    <p>
+Lors du remplissage, le débit d’eau est mesuré par un débitmètre. Ce débitmètre émet des impulsions aux caractéristiques suivantes :
+
+<table class="medium">
+<tr>
+    <td><b>Amplitude</b></td>
+    <td>De l'ordre de 50 mV (mais très variable selon l'intensité du flux)</td>
+</tr>
+
+<tr>
+    <td><b>Fréquence d'oscillation</b></td>
+    <td>~ 10 000 impulsions/L (mais peut varier avec le débit !)</td>
+</tr>
+
+<tr>
+    <td><b>Forme</b></td>
+    <td>Sinusoïdale</td>
+</tr>
+</table>
+</p>
+	
+<p>
+Le PIC doit comptabiliser ces impulsions, pour en déduire le volume d’eau inséré. Par exemple, pour 0.3 L d’eau, il faut qu’un total de 3000 impulsions ait été compté. Cependant plusieurs problèmes (liés aux caractéristiques du débitmètre) se posent :
+	<ol>
+    <li>
+    La fréquence des impulsions est fonction du débit Q : elle n’est à peu près constante que pour un certain intervalle de Q. Au-delà (ou en deçà) de cet intervalle, le débitmètre n’émettra plus exactement 10 000 impulsions par litre. Or, il est indispensable que le nombre d’impulsions du débitmètre par litre d’eau soit constant au cours du remplissage pour que le PIC puisse déterminer le volume inséré. 
+En effet, voici un graphe tiré de la documentation associée au débitmètre représentant le nombre d'impulsions émises par litre, en fonction du débit (voir courbe supérieure) :<br />
+<p>
+<a href="remplissage_air_eau/images/doc_editee.jpg" target="_blank"><img width="500" height="361" src="remplissage_air_eau/images/doc_editee.jpg" class="border" /></a></p>
+On en déduit que le débit Q de remplissage en eau de la bouteille doit donc appartenir à l’intervalle (délimité en vert sur le graphe) <img src="remplissage_air_eau/images/intervalle_debit.gif" class="latex" />.<br />
+Dans cette plage, l'erreur est admissible au vu de la précision requise.
+</li>
+
+<li>
+	Le signal fourni par le débitmètre est trop faible pour être transmis directement au PIC et sa forme est inadaptée (sinusoïdale). De plus ce signal est « parasité » d’après nos observations sur oscilloscope. 
+Il est donc nécessaire d’amplifier ce signal en tenant compte de sa piètre qualité. 
+</li>
+</ol>
+
+<h3>Solution technique</h3>
+<p>
+Pour transmettre au microcontrôleur un signal numérique (tout ou rien) à partir du signal analogique (sinusoïdal), nous avons opté pour un AOP alimenté symétriquement en +6V/-6V en comparateur.
+Nous avons abouti au montage suivant :
+
+<br /><br />
+<a href="remplissage_air_eau/images/schema.jpg" target="_blank"><img width="550" height="250" src="remplissage_air_eau/images/schema.jpg" class="border" /></a>
+
+<br /><b>(Fichier PSPICE schematics : remplissage_air_eau/pspice/schema.sch)</b>
+</p>
+<p>
+Le signal d'entrée du débitmètre est la somme des signaux sinusoïdaux Vdeb. (Nous avons fait une somme de signaux pour tenir compte de l'imperfection du signal).
+La sortie liée à l'entrée A3 du PIC se situe entre les bornes des résistances Rdiv1 et Rdiv2.
+L'alimentation symétrique est nécessaire pour que les seuils de basculement de notre comparateur à hystérésis soient eux aussi symétriques. S'ils ne le sont pas, le signal de sortie voit ses temps de niveau haut et bas déséquilibrés ce qui peut devenir problématique avec des signaux d'amplitude faible.
+<br /><br />
+Pour réaliser cette alimentation symétrique, nous avons mis en place un pont diviseur de tension (résistances R3 et R4), et une masse virtuelle ("mv" sur le schéma). La tension de sortie de l'AOP est donc idéalement comprise entre -6V et +6V par rapport à cette masse virtuelle, et entre 0 et +12V par rapport à la masse du microcontrôleur (liée à la borne "-" de l'alimentation +12V).
+<br />Le signal de sortie est donc trop grand pour être transmis au PIC directement : la tension est redivisée grâce aux résistances Rdiv1 et Rdiv2.
+</p>
+<h4>Simulation informatique</h4>
+<p>Nous avons effectué la simulation de ce montage grâce au logiciel PSPICE. Le fonctionnement est bien celui attendu. Le signal de sortie est tout à fait exploitable par le PIC qui peut comptabiliser les impulsions sans problème.</p>
+<p><a href="remplissage_air_eau/images/simulation.jpg" target="_blank"><img width="600" height="498" src="remplissage_air_eau/images/simulation.jpg" class="border" /></a><br /><em>Sur le graphe supérieur, le signal d'entrée est représenté en vert. Le seuil de basculement est lui représenté en rouge (proche de 0V). Sur le graphe inférieur est représenté le signal de sortie qui est transmis à l'entrée A3 du PIC, en vert.</em></p>
+
+<h4>Montage - test</h4>
+<p>Nous avons réalisé le câblage du montage schématisé ci-dessus, puis relevé les valeurs de sortie et d'entrée à l'aide d'un oscilloscope (par rapport à la masse virtuelle). Voici les signaux obtenus :</p>
+
+<p><a href="remplissage_air_eau/images/oscillo.jpg" target="_blank"><img width="550" height="250" src="remplissage_air_eau/images/oscillo.jpg" class="border" /></a></p>
+
+				</div>
+				
+			</div>
+            </div>
+			<div id="footer">
+				<b>PPE 2011-2012</b>, AUTOMATISATION BASE DE LANCEMENT DE FUSÉES À EAU.<br />
+                Lycée Louis Lachenal
+			</div>
+
+		</div>
+	</body>
+</html>
